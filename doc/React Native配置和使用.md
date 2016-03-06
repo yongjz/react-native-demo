@@ -30,8 +30,6 @@ ios只需要从Appstore下载安装xcode7即可。
       - Android 6.0 (API 23)
       - Android Support Repository
    - 选择需要安装的包，如下图：   
-    ![SDK Manager window](AndroidSDK1.png)    
-    ![SDK Manager window](AndroidSDK2.png)   
     点击"Install Packages"即可。
    - **注意**，可能会遇到一些坑   
       - 要根据官网所要求的包进行安装，例如目前Android SDK Build-tools官网文档中要求版本是23.0.1，最新版本是23.0.2，要看清楚版本号进行安装。
@@ -48,8 +46,6 @@ ios只需要从Appstore下载安装xcode7即可。
    - 创建一个模拟器（ Android Virtual Device，AVD）
    - 命令行输入`android avd`,打开avd管理器，点击`Create...`新建一个模拟器，填写配置即可。
    - 选择已经建好的模拟器，点击`Start...`。   
-     ![SDK Manager window](AndroidSDK3.png)    
-     ![SDK Manager window](AndroidSDK4.png)
    
    **注意：**
    前面使用Android SDK Manager下载的HAXM其实并没有安装，只是下载到本地了，还需要手动安装一下，文件下载到了android-sdk目录下的extras文件夹中`/usr/local/opt/android-sdk/extras/intel/Hardware_Accelerated_Execution_Manager`
@@ -73,7 +69,6 @@ ios只需要从Appstore下载安装xcode7即可。
 - 修改index.android.js，然后在模拟器中使用`F2`重新加载app。
 - 命令行中输入`adb logcat *:S ReactNative:V ReactNativeJS:V`，即可在命令行终端看到app运行的日志。
 - **注意:**如果初始化的项目编译不通过，请检查Android SDK Manager中是否存在没有安装好或者版本不正确的package。   
-   ![SDK Manager window](AndroidSDK5.png)
 
 我主要是参考[官方文档](http://facebook.github.io/react-native/)进行的配置，在配置android环境过程中遇到了一些麻烦。
 
