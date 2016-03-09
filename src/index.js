@@ -3,22 +3,67 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+
 class ReactNativeDemo extends Component {
-  render() {
+  renderLoadingView() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Init a react native project.
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit src/index.js
+        <Text>
+          Loading movies...
         </Text>
       </View>
     );
   }
+
+  renderMovie(movie) {
+    return (
+      <View style={styles.container}>
+        <Image
+          source={{uri: movie.posters.thumbnail}}
+          style={styles.thumbnail}/>
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{movie.title}</Text>
+          <Text style={styles.year}>{movie.year}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  render() {
+    if(!this.state.movies) {
+      return this.renderLoadingView();
+    }
+    var movie = this.state.movies[0];
+    return this.renderMovie(movie);
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      movies: null,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          movies: responseData.movies,
+        });
+      })
+      .done();
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -27,16 +72,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    flexDirection: 'row',
   },
-  welcome: {
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  rightContainer: {
+    flex: 1,
+    backgroundColor: 'yellow',
+  },
+  title: {
     fontSize: 20,
+    marginBottom: 8,
     textAlign: 'center',
-    margin: 10,
   },
-  instructions: {
+  year: {
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 
