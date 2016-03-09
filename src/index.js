@@ -4,12 +4,39 @@ import React, {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  ListView,
 } from 'react-native';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
 class ReactNativeDemo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+      loaded: false,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          loaded: true,
+        });
+      })
+      .done();
+  }
+
   renderLoadingView() {
     return (
       <View style={styles.container}>
@@ -35,35 +62,18 @@ class ReactNativeDemo extends Component {
   }
 
   render() {
-    if(!this.state.movies) {
+    if(!this.state.loaded) {
       return this.renderLoadingView();
     }
-    var movie = this.state.movies[0];
-    return this.renderMovie(movie);
+    //var movie = this.state.movies[0];
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderMovie}
+        style={styles.listView}
+      />
+    );
   }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: null,
-    };
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          movies: responseData.movies,
-        });
-      })
-      .done();
-  }
-
 }
 
 const styles = StyleSheet.create({
@@ -73,6 +83,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flexDirection: 'row',
+    borderColor: 'black',
+    borderTopWidth: 1,
   },
   thumbnail: {
     width: 53,
@@ -80,7 +92,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 1,
-    backgroundColor: 'yellow',
+    backgroundColor: '#F5FCFF',
   },
   title: {
     fontSize: 20,
@@ -90,6 +102,10 @@ const styles = StyleSheet.create({
   year: {
     textAlign: 'center',
   },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  }
 });
 
 export default ReactNativeDemo;
