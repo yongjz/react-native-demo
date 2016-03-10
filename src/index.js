@@ -8,16 +8,16 @@ import React, {
   ListView,
   Navigator
 } from 'react-native';
-import First from './First.js';
-import Second from './Second.js';
-import Third from './Third.js';
+import First from './navigator/First.js';
+import Second from './navigator/Second.js';
+import Third from './navigator/Third.js';
 import MovieList from './MovieList.js';
 
 class ReactNativeDemo extends Component {
   navigatorRenderScene(route, navigator) {
     switch (route.name) {
       case 'first':
-        return (<First navigator={navigator} title="first"/>);
+        return (<First navigator={navigator} title="first" />);
       case 'second':
         return (<Second navigator={navigator} title="second" />);
       case 'third':
@@ -30,7 +30,7 @@ class ReactNativeDemo extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{name: 'first'}}
+        initialRoute={{name: 'first', index: 0}}
         renderScene={this.navigatorRenderScene}
       />
     );

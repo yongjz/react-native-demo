@@ -74,7 +74,10 @@ class MovieList extends Component {
     }
     return (
       <View>
-        <TouchableHighlight onPress={this.navFirst.bind(this)}>
+        <TouchableHighlight
+          style={styles.headerBtn}
+          underlayColor={'red'}
+          onPress={this.navFirst.bind(this)}>
           <Text>Go to first screen</Text>
         </TouchableHighlight>
         <ListView
@@ -114,8 +117,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   listView: {
-    paddingTop: 20,
+    //paddingTop: 20,
     backgroundColor: '#F5FCFF',
+  },
+  headerBtn: {
+    marginTop: 20,
+    height: 20,
+    width: 200,
+    backgroundColor: 'blue'
   }
 });
 

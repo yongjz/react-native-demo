@@ -1,8 +1,15 @@
 'use strict';
 import React, {
-  AppRegistry
+  AppRegistry,
+  NavigatorIOS,
+  StyleSheet,
 } from 'react-native';
-import ReactNativeDemo from './src/index';
+import ReactNativeDemo from './src';
 
+// class ReactNativeDemo extends Component {
+//     render() {
+//
+//     }
+// }
 
 AppRegistry.registerComponent('ReactNativeDemo', () => ReactNativeDemo);
