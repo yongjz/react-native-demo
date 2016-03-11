@@ -11,7 +11,7 @@ import React, {
 import First from './navigator/First.js';
 import Second from './navigator/Second.js';
 import Third from './navigator/Third.js';
-import MovieList from './MovieList.js';
+import MovieList from './component/MovieList.js';
 
 class ReactNativeDemo extends Component {
   navigatorRenderScene(route, navigator) {

@@ -78,7 +78,7 @@ class MovieList extends Component {
           style={styles.headerBtn}
           underlayColor={'red'}
           onPress={this.navFirst.bind(this)}>
-          <Text>Go to first screen</Text>
+          <Text style={styles.btnFontColor}>Go to first screen</Text>
         </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
@@ -123,9 +123,12 @@ const styles = StyleSheet.create({
   headerBtn: {
     marginTop: 20,
     height: 20,
-    width: 200,
-    backgroundColor: 'blue'
-  }
+    width: 120,
+    backgroundColor: 'blue',
+  },
+  btnFontColor: {
+    color: 'white',
+  },
 });
 
 export default MovieList;
